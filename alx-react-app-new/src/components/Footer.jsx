@@ -9,7 +9,7 @@ function Footer() {
       position: 'fixed', 
       width: '100%', 
       bottom: '0' 
-      
+
     }}>
       <p>© 2023 City Lovers</p>
     </footer>
