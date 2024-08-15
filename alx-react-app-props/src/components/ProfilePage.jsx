@@ -4,4 +4,4 @@ function ProfilePage() {
   return <UserInfo />;
 }
 
-export default UserInfo;
+export default ProfilePage;
