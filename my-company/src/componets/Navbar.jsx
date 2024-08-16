@@ -7,11 +7,7 @@ function Navbar(){
   return (
     <>
 
-        <nav style={{ 
-
-            padding: '10px', 
-            background: '#333',
-            color: '#fff'
+        <nav style={{ padding: '10px', background: '#333',color: '#fff'
              }}>
             <div>
             <Link to= "/" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none'}}>Home</Link> 
