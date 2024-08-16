@@ -13,15 +13,11 @@ function Navbar(){
             background: '#333',
             color: '#fff'
              }}>
-            <div style={{ 
-                margin: '0 10px', 
-                color: '#fff', 
-                textDecoration: 'none' 
-                }}>
-            <Link to= "/">Home</Link> 
-            <Link to="/about" >About</Link> 
-            <Link to="/services">Services</Link> 
-            <Link to="/contact">Contact</Link> 
+            <div>
+            <Link to= "/" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none'}}>Home</Link> 
+            <Link to="/about" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none'}}>About</Link> 
+            <Link to="/services"style={{ margin: '0 10px', color: '#fff', textDecoration: 'none'}}>Services</Link> 
+            <Link to="/contact"style={{ margin: '0 10px', color: '#fff', textDecoration: 'none'}}>Contact</Link> 
             </div>
         </nav> 
 
