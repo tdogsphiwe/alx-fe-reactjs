@@ -1,11 +1,11 @@
 import './App.css';
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './componets/Home';
-import About from './componets/About';
-import Services from './componets/Services';
-import Contact from './componets/Contact';
-import Navbar from './componets/Navbar';
+import Home from './components/Home';
+import About from './components/About';
+import Services from './components/Services';
+import Contact from './components/Contact';
+import Navbar from './components/Navbar';
 
 
 function App() {
