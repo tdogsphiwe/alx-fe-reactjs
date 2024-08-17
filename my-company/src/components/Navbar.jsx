@@ -7,7 +7,15 @@ function Navbar(){
   return (
     <>
 
-        <nav style={{ padding: '10px', background: '#333',color: '#fff'}}>
+        <nav  style={{
+                backgroundColor: "hsl(0, 0%, 11%)",
+                padding: "20px",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                gap: "20px",
+                alignItems: "center" 
+              }}>
             <div>
             <Link to= "/" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none'}}>Home</Link> 
             <Link to="/about" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none'}}>About</Link> 
