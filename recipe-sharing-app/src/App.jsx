@@ -3,6 +3,8 @@ import AddRecipeForm from './components/AddRecipeForm';
 import RecipeList from './components/RecipeList';
 import RecipeDetails from './components/RecipeDetails';
 import SearchBar from './components/SearchBar';
+import FavoritesList from "./components/FavoritesList";
+import RecommendationList from "./components/RecommendationsList";
 
 function App() {
   return (
@@ -15,9 +17,11 @@ function App() {
         <Route path="/" element={<RecipeList />} />
         <Route path="/recipe/:id" element={<RecipeDetails />} />
       </Routes>
+      <FavoritesList />
+      <RecommendationList />
     </div>
   </Router>
   );
-}
+};
 
 export default App;
