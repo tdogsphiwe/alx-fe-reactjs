@@ -1,89 +1,73 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import data from '../data.json'; 
 
 
 const AddRecipeForm = () => {
   const [title, setTitle] = useState('');
-  const [summary, setSummary] = useState('');
-  const [image, setImage] = useState('');
+  const [ingredients, setIngredients] = useState('');
+  const [steps, setSteps] = useState('');
   const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!title || !summary || !image) {
-      setError('All fields are required');
+    if (!title || !ingredients || !steps) {
+      setError('All fields are required.');
       return;
     }
 
-    console.log({
-      title,
-      summary,
-      image
-    });
+    setError('');
+
+    console.log({ title, ingredients, steps });
 
     setTitle('');
-    setSummary('');
-    setImage('');
-    setError('');
+    setIngredients('');
+    setSteps('');
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Add a New Recipe</h1>
+    <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+      <h2 className="text-2xl font-semibold mb-4">Add New Recipe</h2>
+      
+      {error && <p className="text-red-500 mb-4">{error}</p>}
 
-      {error && <p className="text-red-500">{error}</p>}
+      <div className="mb-4">
+        <label className="block text-gray-700">Recipe Title</label>
+        <input 
+          type="text" 
+          value={title} 
+          onChange={(e) => setTitle(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded mt-1"
+          placeholder="Enter recipe title" 
+        />
+      </div>
 
-      <form onSubmit={handleSubmit} className="bg-white p-4 rounded-lg shadow-md">
-        <div className="mb-4">
-          <label className="block text-sm font-bold mb-2" htmlFor="title">
-            Recipe Title
-          </label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-full p-2 border rounded-md"
-            placeholder="Enter recipe title"
-          />
-        </div>
+      <div className="mb-4">
+        <label className="block text-gray-700">Ingredients</label>
+        <textarea 
+          value={ingredients} 
+          onChange={(e) => setIngredients(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded mt-1"
+          placeholder="List the ingredients" 
+        />
+      </div>
 
-        <div className="mb-4">
-          <label className="block text-sm font-bold mb-2" htmlFor="summary">
-            Recipe Summary
-          </label>
-          <textarea
-            id="summary"
-            value={summary}
-            onChange={(e) => setSummary(e.target.value)}
-            className="w-full p-2 border rounded-md"
-            placeholder="Enter recipe summary"
-          />
-        </div>
+      <div className="mb-4">
+        <label className="block text-gray-700">Preparation Steps</label>
+        <textarea 
+          value={steps} 
+          onChange={(e) => setSteps(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded mt-1"
+          placeholder="Describe the preparation steps" 
+        />
+      </div>
 
-        <div className="mb-4">
-          <label className="block text-sm font-bold mb-2" htmlFor="image">
-            Recipe Image URL
-          </label>
-          <input
-            type="text"
-            id="image"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-            className="w-full p-2 border rounded-md"
-            placeholder="Enter image URL"
-          />
-        </div>
-
-        <button
-          type="submit"
-          className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
-        >
-          Add Recipe
-        </button>
-      </form>
-    </div>
+      <button 
+        type="submit"
+        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+      >
+        Submit Recipe
+      </button>
+    </form>
   );
 };
 
