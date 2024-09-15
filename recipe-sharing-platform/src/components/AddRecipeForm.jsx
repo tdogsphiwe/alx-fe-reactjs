@@ -35,13 +35,13 @@ function AddRecipeForm() {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 md:p-6 lg:p-8">
       <nav className="mb-4">
         <a href="/" className="text-blue-500 hover:underline">Home</a> |{' '}
         <a href="/add-recipe" className="text-blue-500 hover:underline">Add Recipe</a>
       </nav>
-      <h1 className="text-2xl font-bold mb-4">Add New Recipe</h1>
-      <form onSubmit={handleSubmit} className="bg-white p-4 rounded shadow">
+      <h1 className="text-2xl font-bold mb-4 md:text-3xl">Add New Recipe</h1>
+      <form onSubmit={handleSubmit} className="bg-white p-4 rounded shadow md:p-6">
         <label className="block mb-2">
           <span className="text-gray-700">Title</span>
           <input
@@ -84,7 +84,7 @@ function AddRecipeForm() {
         </label>
         <button
           type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
+          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition md:py-3 md:px-6"
         >
           Submit
         </button>
