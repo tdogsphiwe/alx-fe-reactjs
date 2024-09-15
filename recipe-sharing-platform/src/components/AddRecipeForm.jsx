@@ -1,74 +1,94 @@
-import { useState } from 'react';
-import data from '../data.json'; 
-
+import React, { useState } from 'react';
 
 const AddRecipeForm = () => {
-  const [title, setTitle] = useState('');
-  const [ingredients, setIngredients] = useState('');
-  const [steps, setSteps] = useState('');
-  const [error, setError] = useState('');
+  const [recipe, setRecipe] = useState({ name: '', description: '', ingredients: '', instructions: '' });
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const newErrors = {};
+    if (!recipe.name) newErrors.name = 'Name is required';
+    if (!recipe.description) newErrors.description = 'Description is required';
+    if (!recipe.ingredients) newErrors.ingredients = 'Ingredients are required';
+    if (!recipe.instructions) newErrors.instructions = 'Instructions are required';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title || !ingredients || !steps) {
-      setError('All fields are required.');
-      return;
+    if (validate()) {
+      console.log('Recipe submitted:', recipe);
+      // You can add logic to save the recipe here
     }
+  };
 
-    setError('');
-
-    console.log({ title, ingredients, steps });
-
-    setTitle('');
-    setIngredients('');
-    setSteps('');
+  const handleChange = (e) => {
+    setRecipe({ ...recipe, [e.target.name]: e.target.value });
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-semibold mb-4">Add New Recipe</h2>
-      
-      {error && <p className="text-red-500 mb-4">{error}</p>}
+    <form onSubmit={handleSubmit} className="p-4">
+      <h2 className="text-xl font-bold mb-4">Add a New Recipe</h2>
 
       <div className="mb-4">
-        <label className="block text-gray-700">Recipe Title</label>
-        <input 
-          type="text" 
-          value={title} 
-          onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded mt-1"
-          placeholder="Enter recipe title" 
+        <label htmlFor="name" className="block text-sm font-medium">
+          Name
+        </label>
+        <input
+          type="text"
+          name="name"
+          value={recipe.name}
+          onChange={handleChange}
+          className="mt-1 p-2 border rounded w-full"
         />
+        {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700">Ingredients</label>
-        <textarea 
-          value={ingredients} 
-          onChange={(e) => setIngredients(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded mt-1"
-          placeholder="List the ingredients" 
+        <label htmlFor="description" className="block text-sm font-medium">
+          Description
+        </label>
+        <textarea
+          name="description"
+          value={recipe.description}
+          onChange={handleChange}
+          className="mt-1 p-2 border rounded w-full"
         />
+        {errors.description && <p className="text-red-500 text-sm">{errors.description}</p>}
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700">Preparation Steps</label>
-        <textarea 
-          value={steps} 
-          onChange={(e) => setSteps(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded mt-1"
-          placeholder="Describe the preparation steps" 
+        <label htmlFor="ingredients" className="block text-sm font-medium">
+          Ingredients
+        </label>
+        <textarea
+          name="ingredients"
+          value={recipe.ingredients}
+          onChange={handleChange}
+          className="mt-1 p-2 border rounded w-full"
         />
+        {errors.ingredients && <p className="text-red-500 text-sm">{errors.ingredients}</p>}
       </div>
 
-      <button 
-        type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-      >
-        Submit Recipe
+      <div className="mb-4">
+        <label htmlFor="instructions" className="block text-sm font-medium">
+          Instructions
+        </label>
+        <textarea
+          name="instructions"
+          value={recipe.instructions}
+          onChange={handleChange}
+          className="mt-1 p-2 border rounded w-full"
+        />
+        {errors.instructions && <p className="text-red-500 text-sm">{errors.instructions}</p>}
+      </div>
+
+      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+        Add Recipe
       </button>
     </form>
   );
 };
 
 export default AddRecipeForm;
+
