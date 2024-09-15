@@ -5,9 +5,25 @@ function AddRecipeForm() {
   const [summary, setSummary] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [steps, setSteps] = useState('');
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const newErrors = {};
+    if (!title.trim()) newErrors.title = 'Title is required';
+    if (!summary.trim()) newErrors.summary = 'Summary is required';
+    if (!ingredients.trim()) newErrors.ingredients = 'Ingredients are required';
+    if (!steps.trim()) newErrors.steps = 'Preparation steps are required';
+    return newErrors;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
     // Handle form submission (e.g., send data to API or local state)
     console.log({ title, summary, ingredients: ingredients.split('\n'), steps: steps.split('\n') });
     // Clear the form after submission
@@ -15,6 +31,7 @@ function AddRecipeForm() {
     setSummary('');
     setIngredients('');
     setSteps('');
+    setErrors({});
   };
 
   return (
@@ -31,39 +48,39 @@ function AddRecipeForm() {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="form-input mt-1 block w-full"
-            required
+            className={`form-input mt-1 block w-full ${errors.title ? 'border-red-500' : ''}`}
           />
+          {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
         </label>
         <label className="block mb-2">
           <span className="text-gray-700">Summary</span>
           <textarea
             value={summary}
             onChange={(e) => setSummary(e.target.value)}
-            className="form-textarea mt-1 block w-full"
+            className={`form-textarea mt-1 block w-full ${errors.summary ? 'border-red-500' : ''}`}
             rows="2"
-            required
           />
+          {errors.summary && <p className="text-red-500 text-sm">{errors.summary}</p>}
         </label>
         <label className="block mb-2">
           <span className="text-gray-700">Ingredients (one per line)</span>
           <textarea
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
-            className="form-textarea mt-1 block w-full"
+            className={`form-textarea mt-1 block w-full ${errors.ingredients ? 'border-red-500' : ''}`}
             rows="4"
-            required
           />
+          {errors.ingredients && <p className="text-red-500 text-sm">{errors.ingredients}</p>}
         </label>
         <label className="block mb-2">
           <span className="text-gray-700">Preparation Steps (one per line)</span>
           <textarea
             value={steps}
             onChange={(e) => setSteps(e.target.value)}
-            className="form-textarea mt-1 block w-full"
+            className={`form-textarea mt-1 block w-full ${errors.steps ? 'border-red-500' : ''}`}
             rows="4"
-            required
           />
+          {errors.steps && <p className="text-red-500 text-sm">{errors.steps}</p>}
         </label>
         <button
           type="submit"
@@ -77,4 +94,3 @@ function AddRecipeForm() {
 }
 
 export default AddRecipeForm;
-
